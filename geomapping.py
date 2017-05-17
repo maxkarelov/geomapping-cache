@@ -8,6 +8,7 @@ import os
 
 
 REDIS_URL = os.environ.get('REDIS_URL')
+PORT = int(os.environ.get('PORT', 5000))
 
 app = Flask(__name__)
 r_server = redis.Redis.from_url(REDIS_URL)
@@ -79,4 +80,4 @@ def hello():
   return jsonify(response)
 
 if __name__ == "__main__":
-  app.run(debug=True)
+  app.run(debug=True, port=PORT)
