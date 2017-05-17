@@ -76,17 +76,18 @@ def cache():
 
     response = {
       'status': 'ok',
-      'street': street,
-      'house': house,
-      'latitude': float(latitude),
-      'longitude': float(longitude)
+      'street': street.encode('utf-8'),
+      'house': house.encode('utf-8'),
+      'latitude': float(latitude.encode('utf-8')),
+      'longitude': float(longitude.encode('utf-8'))
     }
 
     return jsonify(response)
 
   except Exception as e:
     print(e)
-    return jsonify({'status': 'err'})
+
+  return jsonify({'status': 'err'})
 
 if __name__ == "__main__":
   app.run(debug=False, host='0.0.0.0', port=PORT)
