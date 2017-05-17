@@ -13,9 +13,12 @@ PORT = int(os.environ.get('PORT', 5000))
 app = Flask(__name__)
 r_server = redis.Redis.from_url(REDIS_URL)
 
+@app.route('/')
+def index():
+  return "OK"
 
-@app.route("/")
-def hello():
+@app.route('/cache')
+def cache():
   address = request.args.get('address')
   if not address:
     return "error"
