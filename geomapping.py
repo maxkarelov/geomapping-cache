@@ -1,3 +1,5 @@
+# encoding: utf-8
+
 from flask import Flask
 from flask import request
 from flask import jsonify
@@ -9,6 +11,7 @@ import os
 
 REDIS_URL = os.environ.get('REDIS_URL')
 PORT = int(os.environ.get('PORT', 5000))
+DEBUG = bool(os.environ.get('DEBUG', 0))
 
 app = Flask(__name__)
 r_server = redis.Redis.from_url(REDIS_URL)
@@ -40,7 +43,7 @@ def cache():
 
 
   if not latitude and not longitude:
-    service_response = requests.get("https://geocode-maps.yandex.ru/1.x/?geocode={}&format=json".format(address))
+    service_response = requests.get("https://geocode-maps.yandex.ru/1.x/?geocode=Саратов {}&format=json".format(address.encode('utf-8')))
     if service_response.status_code != 200:
       jsonify({'status': 'err'})
 
@@ -90,4 +93,4 @@ def cache():
   return jsonify({'status': 'err'})
 
 if __name__ == "__main__":
-  app.run(debug=False, host='0.0.0.0', port=PORT)
+  app.run(debug=DEBUG, host='0.0.0.0', port=PORT)
