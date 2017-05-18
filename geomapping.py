@@ -50,13 +50,13 @@ def cache():
     root = json.loads(service_response.text)
 
     found = int(root['response']['GeoObjectCollection']['metaDataProperty']['GeocoderResponseMetaData']['found'])
-    print(found)
+    # print(found)
     feature_member = root['response']['GeoObjectCollection']['featureMember'][0]
 
     address_details = feature_member['GeoObject']['metaDataProperty']['GeocoderMetaData']
-    print(address_details['kind'])
-    print(address_details['text'])
-    print(address_details['precision'])
+    # print(address_details['kind'])
+    # print(address_details['text'])
+    # print(address_details['precision'])
 
     street = ''
     house = ''
